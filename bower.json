@@ -1,0 +1,17 @@
+{
+  "name": "onfoantload",
+  "authors": [
+    "Eduardo Barbosa <eduardomb@ufmg.br>"
+  ],
+  "description": "Lightweight Javascirpt Plugin to detect when fonts are loaded.",
+  "main": "onfontload.js",
+  "moduleType": [],
+  "keywords": [
+    "Javascript",
+    "Font",
+    "Load",
+    "Event"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/eduardomb/onfontload"
+}
