@@ -1,7 +1,7 @@
 # onFontLoad Event
 
 This plugin detects when the fonts linked with `font-face` are loaded and ready
-to use. It's a very **lightweight** (`~3kb`) solution to Flash of Unstyled Text
+to use. It's a very **lightweight** (`1Kb` gzipped) solution to Flash of Unstyled Text
 (FOUT).
 
 ## Basic Usage
@@ -59,12 +59,12 @@ font is loaded was extracted from `Web Font Loader` project (details can be
 found in this great blog post [More reliable font
 events](http://blog.typekit.com/2013/02/05/more-reliable-font-events/)).
 
-The `onFontLoad` advantage is that it's only `3kbs` (`~70%` lighter than `Web
-Font Loader`). This is because `onFontLoad` mission is to simply detect when
-fonts are loaded. `Web Font Loader` on the other hand also provides a load
+The `onFontLoad` advantage is that it's only `1kb` gzipped (`~80%` smaller than
+`Web Font Loader`). This is because `onFontLoad` mission is to simply detect
+when fonts are loaded. `Web Font Loader` on the other hand also provides a load
 mechanism and some other features.
 
 If you want more than just detect the font load event or you don't mind adding
-a few extra `kbs` to your project, than `Web Font Loader` is a better suite for
+a few extra `kb` to your project, than `Web Font Loader` is a better suite for
 you. But if you're freak like me that hates every unused downloaded `kb` in
 your web system, then this plugin is for you.
