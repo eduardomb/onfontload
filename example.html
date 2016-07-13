@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>onFontLoad Event</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+  <style>
+  body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+    transition: 1s opacity;
+  }
+
+  body.hidden {
+    opacity: 0;
+  }
+
+  #page {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .status {
+    color: #9E9E9E;
+  }
+
+  .status.success {
+    color: #4CAF50;
+  }
+
+  .status.timeout {
+    color: #F44336;
+  }
+
+  .sample-text.hidden {
+    display: none;
+  }
+
+  #galada .sample-text {
+    font-family: 'Galada';
+  }
+
+  #indie .sample-text {
+    font-family: 'Indie Flower';
+  }
+
+  a {
+    color: #2196F3;
+    text-decoration: none;
+    transition: 300ms color;
+  }
+
+  a:hover {
+    color: #1565C0;
+  }
+  </style>
+</head>
+<body class="hidden">
+  <div id="page">
+    <h1>onFontLoad example</h1>
+    <p>The <b>onFontLoad</b> plugin detects when the fonts linked with
+    <code>font-face</code> are loaded and ready to use. It's a very lightweight
+    (1Kb gzipped) solution to Flash of Unstyled Text (<b>FOUT</b>).</p>
+
+    <p>Usage instructions available on
+    <a href="https://github.com/eduardomb/onfontload">GitHub</a>.</p>
+
+    <p>This page will only displays after the main font is loaded. A sample
+    text will be appended to the next three fonts below when they're ready.</p>
+
+    <ol>
+      <li id="galada">Galada: <span class="status">Loading...</span> <span class="sample-text hidden">Sample Text</span></li>
+      <li id="indie">Indie Flower: <span class="status">Loading...</span> <span class="sample-text hidden">Sample Text</span></li>
+      <li id="fontawesome">FontAwesome:
+        <span class="status">Loading...</span>
+        <span class="sample-text hidden">
+          <i class="fa fa-car"></i>
+          <i class="fa fa-male"></i>
+          <i class="fa fa-female"></i>
+        </span>
+      </li>
+    </ol>
+
+    <p>You might need to disable browser cache or setup a network throttling to
+    see Loading phase.</p>
+  </div>
+
+  <script src="onfontload.min.js"></script>
+
+  <!-- Font Awesome CDN -->
+  <script src="https://use.fontawesome.com/9ebc267e35.js"></script>
+
+  <script type="text/javascript">
+    (function() {
+      /*
+       *  Load fonts asynchronously (But it could also have been loaded
+       *  normally without JS, using the link tag in head like we did with Open
+       *  Sans)
+       */
+      var link = document.createElement('link');
+			link.rel  = 'stylesheet';
+			link.type = 'text/css';
+      link.href = 'https://fonts.googleapis.com/css?family=Galada|Indie+Flower';
+      link.media = 'all';
+
+      var head = document.getElementsByTagName('head')[0];
+      head.appendChild(link);
+
+      /*
+       * onFontLoad events. Here we use one event per font, but if we wanted to
+       * wait for all fonts together we could have used a single event passing
+       * a list with all fonts to it.
+       */
+      onFontLoad([{family: 'Open Sans'}], function() {
+        document.body.classList.remove('hidden');
+      });
+
+      onFontLoad([{family: 'Galada'}], function(success) {
+        var li = document.getElementById('galada'),
+            status = li.getElementsByClassName('status')[0],
+            sample = li.getElementsByClassName('sample-text')[0];
+
+        if (success) {
+          status.classList.add('success');
+          status.innerHTML = 'Loaded!';
+          sample.classList.remove('hidden');
+        } else {
+          status.innerHTML = 'Load timeout';
+          status.classList.add('timeout');
+        }
+      });
+
+      onFontLoad([{family: 'Indie Flower'}], function(success) {
+        var li = document.getElementById('indie'),
+            status = li.getElementsByClassName('status')[0],
+            sample = li.getElementsByClassName('sample-text')[0];
+
+        if (success) {
+          status.classList.add('success');
+          status.innerHTML = 'Loaded!';
+          sample.classList.remove('hidden');
+        } else {
+          status.innerHTML = 'Load timeout';
+          status.classList.add('timeout');
+        }
+      });
+
+      // &#xf013; is the HTML representation of the unicode f013. This is the
+      // unicode for the icon fa-cog, but I could have picked any icon.
+      onFontLoad([{family: 'FontAwesome', testText: '&#xf013;'}], function(success) {
+        var li = document.getElementById('fontawesome'),
+            status = li.getElementsByClassName('status')[0],
+            sample = li.getElementsByClassName('sample-text')[0];
+
+        if (success) {
+          status.classList.add('success');
+          status.innerHTML = 'Loaded!';
+          sample.classList.remove('hidden');
+        } else {
+          status.innerHTML = 'Load timeout';
+          status.classList.add('timeout');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
