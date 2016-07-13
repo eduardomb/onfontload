@@ -4,6 +4,13 @@ This plugin detects when the fonts linked with `font-face` are loaded and ready
 to use. It's a very **lightweight** (`1Kb` gzipped) solution to Flash of Unstyled Text
 (FOUT).
 
+
+## Demo
+
+The [Demo Page](https://eduardomb.github.io/onfontload/) shows an example of
+how to prevent FOUT and also how to use this plugin with an icon font
+(FontAwesome).
+
 ## Basic Usage
 
 Use `font-face` to link the fonts you want. In the example below I use Google
@@ -47,8 +54,6 @@ font descriptor is an object with the following keys:
 
 A boolean `success` argument is passed to `callback`. If the fonts are not
 loaded after 3 seconds the `callback` will be called with `success = false`.
-
-
 
 
 ## Why not use webfontloader instead?
